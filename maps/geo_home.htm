@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script type='text/javascript'>
+        function GetMap() {
+            var map = new Microsoft.Maps.Map('#myMap', {
+                credentials: "AsVT0KLCUbHnb4xBZ9cPX3rnZU-TQvIkBLIEKR7yEX9-Ttb-gsWxnGraWPm00QSb"
+            });
+    
+            //Request the user's location
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var loc = new Microsoft.Maps.Location(
+                    position.coords.latitude,
+                    position.coords.longitude);
+    
+                //Add a pushpin at the user's location.
+                var pin = new Microsoft.Maps.Pushpin(loc);
+                map.entities.push(pin);
+    
+                //Center the map on the user's location.
+                map.setView({ center: loc, zoom: 15 });
+            });
+        }
+        </script>
+         <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+</head>
+
+<body>
+            <h1 id="heading">Maps and canvas</h1>
+            <h1 id="heading1">Maps</h1>
+         <div class="container mt-5">
+    <div class="row">
+      <div class="col">
+        <div id="myMap" style="border-radius: 20px;"></div>
+      </div>
+      <div class="col">
+        <div id="cont">
+        <p id="p-row1">Content mapping is a technique that helps you create and deliver the right content to the right audience at the right time. You do this by creating content maps. A content map is a plan that aligns your content to the different stages of the buyer’s journey</p>
+        <p id="p-row1">To create a content map, you need to identify your buyer persona, their lifecycle stage, and the type of content that suits their needs3. You can use a template like this one to help you organize your ideas.
+
+        </p>
+      </div>
+      </div>
+      </div>
+    </div>
+
+<pre>
+
+
+
+
+
+</pre>
+
+  <h1 id="heading1">canvas</h1>
+
+      <div class="row">
+        <div class="col">
+          <svg width="400" height="270">
+            <circle cx="150" cy="130" r="130" fill="aqua"/>
+          </svg>
+          <canvas id="myCanvas" width="200" height="200"></canvas>
+          </div>
+          <div class="col">
+            <p id="p-row1" class="svg_cont">If you are looking for content for the maps as in Google Maps, you can learn how to add your mapping data, such as aerial imagery or places of interest, to Google Maps as a content partner4. You can also explore the features and benefits of Google Maps here5.</p>
+          </div>
+        </div>     
+  <div class="row">
+    <div class="col">
+        <footer>
+            <p>&copy; This is done by kavaskar</p>
+        </footer>
+      </div>
+     </div>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+body{
+    width:100%;
+    height:100%;
+    background-image: url(/images/map3.jpg) ;
+    background-attachment: fixed;
+    background-size: cover;
+    color:white;
+}
+
+#myMap{
+    position:relative;
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+}
+/*.entire_cont{
+    background-image: url(/images/home_img1.jpg);
+    height:100%;
+    width:100%;
+}*/
+#heading{
+    width:100%;
+    text-align:center;
+    font-size:7vw;
+    color:white; 
+    /*font-family:"Trirong";*/
+}
+#heading1{
+    width:100%;
+    font-size:2.5vw;
+    color:white; 
+    margin:3vw;
+    /*font-family:"Trirong";*/
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    width:100%;
+  }
+main{
+    color:white;
+  }
+
+.container{
+    width:100%;
+    height:100%;
+}
+#myMap {
+    height: 400px;
+  }
+#p-row1{
+    padding-top:0%;
+    margin-left: 3%;
+    color:white;
+    margin-top: 15%;
+    font-size: larger;
+}
+#cont{
+   align-items: center;
+   
+}
+svg{
+    margin-bottom: 10%;
+    margin-top:5%;
+    margin-left:20%;
+}
+.svg_cont{
+    margin-top:25%;
+    padding-top: 4%;
+}
