@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="ecommerce.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<products>
+    <product>
+        <id>1</id>
+        <name>Laptop</name>
+        <price>999.99</price>
+        <description>Powerful laptop with great features.</description>
+    </product>
+    <product>
+        <id>2</id>
+        <name>Slign Bag</name>
+        <price>90</price>
+        <description>Pure cotton bag</description>
+    </product>
+    <product>
+        <id>3</id>
+        <name>Floor Mop</name>
+        <price>10</price>
+        <description>High Durability Plastic</description>
+    </product>
+</products>
