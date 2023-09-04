@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form validator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <form id="RegForm" action="/register" method="post">
+    <input id="fullName" type="text" name="fullName" placeholder="Full Name">
+    <span id="fullNameError"></span>
+    <input id="email" type="email" name="email" placeholder="Email Address">
+    <span id="emailError"></span>
+    <input id="password" type="password" name="password" placeholder="Password">
+    <span id="passwordError"></span>
+    <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm Password">
+    <span id="confirmPasswordError"></span>
+    <input id="dateOfBirth" type="date" name="dateOfBirth">
+    <span id="dateOfBirthError"></span>
+    <input id="submitButton" type="submit" value="Register">
+    </form>
+    
+      <script>// Get the form element and the input elements
+        var form = document.getElementById("RegForm");
+        var fullName = document.getElementById("fullName");
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+        var confirmPassword = document.getElementById("confirmPassword");
+        var dateOfBirth = document.getElementById("dateOfBirth");
+        
+        // Get the error message elements
+        var fullNameError = document.getElementById("fullNameError");
+        var emailError = document.getElementById("emailError");
+        var passwordError = document.getElementById("passwordError");
+        var confirmPasswordError = document.getElementById("confirmPasswordError");
+        var dateOfBirthError = document.getElementById("dateOfBirthError");
+        
+        // Get the status icon elements
+        var fullNameStatus = document.getElementById("fullNameStatus");
+        var emailStatus = document.getElementById("emailStatus");
+        var passwordStatus = document.getElementById("passwordStatus");
+        var confirmPasswordStatus = document.getElementById("confirmPasswordStatus");
+        var dateOfBirthStatus = document.getElementById("dateOfBirthStatus");
+        
+        // Get the submit button element
+        var submitButton = document.getElementById("submitButton");
+        
+        // Define the regular expressions for validation
+        var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+        
+        // Define a function to show an error message and a status icon
+        function showError(input, error, message, status) {
+          // Set the error message text
+          error.textContent = message;
+          // Set the input border color to red
+          input.style.borderColor = "red";
+          // Set the status icon source to a red x
+          status.src = "red-x.png";
+        }
+        
+        // Define a function to show a success message and a status icon
+        function showSuccess(input, error, status) {
+          // Clear the error message text
+          error.textContent = "";
+          // Set the input border color to green
+          input.style.borderColor = "green";
+          // Set the status icon source to a green checkmark
+          status.src = "green-check.png";
+        }
+        
+        // Define a function to validate the full name
+        function validateFullName() {
+          // Get the full name value
+          var value = fullName.value.trim();
+          // Check if it is empty or contains digits
+          if (value == "" || /\d/.test(value)) {
+            // Show an error message and a status icon
+            showError(fullName, fullNameError, "Please enter a valid full name", fullNameStatus);
+            // Return false
+            return false;
+          } else {
+            // Show a success message and a status icon
+            showSuccess(fullName, fullNameError, fullNameStatus);
+            // Return true
+            return true;
+          }
+        }
+        
+        // Define a function to validate the email
+        function validateEmail() {
+          // Get the email value
+          var value = email.value.trim();
+          // Check if it is empty or invalid
+          if (value == "" || !emailRegex.test(value)) {
+            // Show an error message and a status icon
+            showError(email, emailError, "Please enter a valid email address", emailStatus);
+            // Return false
+            return false;
+          } else {
+            // Show a success message and a status icon
+            showSuccess(email, emailError, emailStatus);
+            // Return true
+            return true;
+          }
+        }
+        
+        // Define a function to validate the password
+        function validatePassword() {
+          // Get the password value
+          var value = password.value.trim();
+          // Check if it is empty or invalid
+          if (value == "" || !passwordRegex.test(value)) {
+            // Show an error message and a status icon
+            showError(password, passwordError, "Please enter a password with at least 8 characters, including 1 lowercase, 1 uppercase, 1 number and 1 special character", passwordStatus);
+            // Return false
+            return false;
+          } else {
+            // Show a success message and a status icon
+            showSuccess(password, passwordError, passwordStatus);
+            // Return true
+            return true;
+          }
+        }
+        
+        // Define a function to validate the confirm password
+        function validateConfirmPassword() {
+          // Get the confirm password value
+          var value = confirmPassword.value.trim();
+          // Check if it matches the password value
+          if (value != password.value.trim()) {
+            // Show an error message and a status icon
+            showError(confirmPassword, confirmPasswordError, "Passwords do not match", confirmPasswordStatus);
+            // Return false
+            return false;
+          } else {
+            // Show a success message and a status icon
+            showSuccess(confirmPassword, confirmPasswordError, confirmPasswordStatus);
+            // Return true
+            return true;
+          }
+        }
+        
+        // Define a function to validate the date of birth and calculate the age
+        function validateDateOfBirth() {
+          // Get the date of birth value
+          var value = dateOfBirth.value;
+          // Check if it is empty or in the future
+          var today = new Date();
+          var dob = new Date(value); 
+          if (value == "" || dob > today) {
+            // Show an error message and a status icon
+            showError(dateOfBirth, dateOfBirthError, "Please enter a valid date of birth", dateOfBirthStatus);
+            // Return false
+            return false;
+          } else {
+            // Show a success message and a status icon
+            showSuccess(dateOfBirth, dateOfBirthError, dateOfBirthStatus);
+            // Calculate the age in years
+            var age = today.getFullYear() - dob.getFullYear();
+            var monthDiff = today.getMonth() - dob.getMonth();
+            // Adjust the age if the current month is before the birth month
+            if (monthDiff < 0 || (monthDiff == 0 && today.getDate() < dob.getDate())) {
+              age--;
+            }
+            // Check if the age is at least 18
+            if (age < 18) {
+              // Show an error message and disable the submit button
+              showError(dateOfBirth, dateOfBirthError, "You must be at least 18 years old to register", dateOfBirthStatus);
+              submitButton.disabled = true;
+              // Return false
+              return false;
+            } else {
+              // Enable the submit button
+              submitButton.disabled = false;
+              // Return true
+              return true;
+            }
+          }
+        }
+        
+        // Define a function to validate the form on submit
+        function validateForm(event) {
+          // Prevent the default form submission behavior
+          event.preventDefault();
+          // Validate each input field and store the results in variables
+          var isFullNameValid = validateFullName();
+          var isEmailValid = validateEmail();
+          var isPasswordValid = validatePassword();
+          var isConfirmPasswordValid = validateConfirmPassword();
+          var isDateOfBirthValid = validateDateOfBirth();
+          // Check if all fields are valid
+          if (isFullNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid && isDateOfBirthValid) {
+            // Submit the form data to the server
+            form.submit();
+          }
+        }
+        
+        // Define a function to add event listeners to the input elements
+        function addEventListeners() {
+          // Add input event listeners for real-time validation
+          fullName.addEventListener("input", validateFullName);
+          email.addEventListener("input", validateEmail);
+          password.addEventListener("input", validatePassword);
+          confirmPassword.addEventListener("input", validateConfirmPassword);
+          dateOfBirth.addEventListener("input", validateDateOfBirth);
+          
+          // Add submit event listener for form validation
+          form.addEventListener("submit", validateForm);
+        }
+        
+        // Call the function to add event listeners when the page loads
+        window.onload = addEventListeners;
+        </script>
+      
+</body>
+</html>
